@@ -1,4 +1,6 @@
-﻿namespace SwordEngine
+﻿using SwordEngine.Gfx;
+
+namespace SwordEngine
 {
     /// <summary>
     /// The generic handler for the game engine.
@@ -61,7 +63,7 @@
         /// <summary>
         /// Return the MainGame camera.
         /// </summary>
-        public GameCamera getGameCamera()
+        public GameCamera GetGameCamera()
         {
             return mainGame.getGameCamera();
         }
@@ -86,7 +88,7 @@
         /// <summary>
         /// Returns the main world object
         /// </summary>
-        public World.World getWorld()
+        public World.World GetWorld()
         {
             return world;
         }
@@ -94,7 +96,7 @@
         /// <summary>
         /// Sets the main world object
         /// </summary>
-        public void setWorld(World.World world)
+        public void SetWorld(World.World world)
         {
             this.world = world;
         }

@@ -1,5 +1,6 @@
 ﻿using System.Drawing;
 using SwordEngine.States;
+using SwordEngine.Gfx;
 
 namespace SwordEngine
 {
@@ -11,7 +12,7 @@ namespace SwordEngine
         /// <summary>
         /// Display of the game.
         /// </summary>
-        private Display display;
+        private Display.Display display;
 
         /// <summary>
         /// The window's width/height in pixels.
@@ -21,7 +22,7 @@ namespace SwordEngine
         /// <summary>
         /// The game's camera.
         /// </summary>
-        //private GameCamera gameCamera;
+        private GameCamera gameCamera;
 
         /// <summary>
         /// The set frames per second
@@ -134,7 +135,7 @@ namespace SwordEngine
             }
             if (State.getState() != null)
             {
-                State.getState().update();
+                State.getState().Update();
             }
         }
 
@@ -148,12 +149,12 @@ namespace SwordEngine
         private void render()
         {
             // Gets the amount of buffers the canvas is going to use.
-            bs = display.getCanvas().getBufferStrategy();
+            bs = display.GetCanvas().getBufferStrategy();
 
             // If there isn't any buffers get 3 buffers.
             if (bs == null)
             {
-                display.getCanvas().createBufferStrategy(3);
+                display.GetCanvas().createBufferStrategy(3);
                 return;
             }
 
@@ -181,11 +182,11 @@ namespace SwordEngine
         {
 
             display = new Display.Display(width, height);
-            display.getFrame().addKeyListener(keyManager);
-            display.getFrame().addMouseMotionListener(mouseManager);
-            display.getFrame().addMouseListener(mouseManager);
-            display.getCanvas().addMouseMotionListener(mouseManager);
-            display.getCanvas().addMouseListener(mouseManager);
+            //display.GetSurface().addKeyListener(keyManager);
+            //display.GetSurface().addMouseMotionListener(mouseManager);
+            //display.GetSurface().addMouseListener(mouseManager);
+            //display.GetCanvas().addMouseMotionListener(mouseManager);
+            //display.GetCanvas().addMouseListener(mouseManager);
             Assets.init();
 
             handler = new Handler(this);
@@ -357,5 +358,7 @@ namespace SwordEngine
         {
             return winState;
         }
+
+        #endregion
     }
 }

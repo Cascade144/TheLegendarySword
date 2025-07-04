@@ -1,12 +1,9 @@
 ﻿using SkiaSharp;
 using SwordEngine.Entities;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
+using SwordEngine.Entities.Creatures;
+using SwordEngine.Entities.Statics;
+using SwordEngine.Tiles;
+using SwordEngine.Weapons;
 
 namespace SwordEngine.World
 {
@@ -46,6 +43,8 @@ namespace SwordEngine.World
         /// Contains all of the world's entities.
         /// </summary>
         private EntityManager entityManager;
+
+        #endregion
 
         /// <summary>
         /// Constructs a world object, sets variable defaults, 
@@ -103,19 +102,19 @@ namespace SwordEngine.World
         public void Render(SKCanvas canvas)
         {
             // Render Tiles first.
-            int xStart = (int)Math.max(0, handler.getGameCamera().getxOffset() / Tile.TILEWIDTH);
-            int xEnd = (int)Math.min(width
-                    , (handler.getGameCamera().getxOffset() + handler.getWidth()) / Tile.TILEWIDTH + 1);
-            int yStart = (int)Math.max(0, handler.getGameCamera().getyOffset() / Tile.TILEHEIGHT);
-            int yEnd = (int)Math.min(height
-                    , (handler.getGameCamera().getyOffset() + handler.getHeight()) / Tile.TILEHEIGHT + 1);
+            int xStart = (int)Math.Max(0, handler.GetGameCamera().GetXOffset() / Tile.TILEWIDTH);
+            int xEnd = (int)Math.Min(width
+                    , (handler.GetGameCamera().GetXOffset() + handler.getWidth()) / Tile.TILEWIDTH + 1);
+            int yStart = (int)Math.Max(0, handler.GetGameCamera().GetYOffset() / Tile.TILEHEIGHT);
+            int yEnd = (int)Math.Min(height
+                    , (handler.GetGameCamera().GetYOffset() + handler.getHeight()) / Tile.TILEHEIGHT + 1);
 
             for (int y = yStart; y < yEnd; y++)
             {
                 for (int x = xStart; x < xEnd; x++)
                 {
-                    getTile(x, y).render(canvas, (int)(x * Tile.TILEWIDTH - handler.getGameCamera().getxOffset())
-                            , (int)(y * Tile.TILEHEIGHT - handler.getGameCamera().getyOffset()));
+                    getTile(x, y).Render(canvas, (int)(x * Tile.TILEWIDTH - handler.GetGameCamera().GetXOffset())
+                            , (int)(y * Tile.TILEHEIGHT - handler.GetGameCamera().GetYOffset()));
                 }
             }
 
@@ -158,17 +157,17 @@ namespace SwordEngine.World
             String file = Utils.loadFileAsString(path);
             String[] tokens = file.split("\\s+"); // split on whitespace
 
-            width = Utils.parseInt(tokens[0]);
-            height = Utils.parseInt(tokens[1]);
-            spawnX = Utils.parseInt(tokens[2]) * Tile.TILEWIDTH;
-            spawnY = Utils.parseInt(tokens[3]) * Tile.TILEHEIGHT;
+            width = int.Parse(tokens[0]);
+            height = int.Parse(tokens[1]);
+            spawnX = int.Parse(tokens[2]) * Tile.TILEWIDTH;
+            spawnY = int.Parse(tokens[3]) * Tile.TILEHEIGHT;
 
             wTiles = new int[width][height];
             for (int y = 0; y < height; y++)
             {
                 for (int x = 0; x < width; x++)
                 {
-                    wTiles[x][y] = Utils.parseInt(tokens[(x + y * width) + 4]);
+                    wTiles[x][y] = int.Parse(tokens[(x + y * width) + 4]);
                 }
             }
 
@@ -179,62 +178,57 @@ namespace SwordEngine.World
 
         }
 
-        // Getters and Setters
+        #region Getters and Setters
 
-        /**
-         * Returns the width of the world in TILES
-         * @return
-         * 	The world width in tiles
-         */
-        public int getWidth()
+        /// <summary>
+        /// Returns the width of the world in TILES.
+        /// </summary>
+        public int GetWidth()
         {
             return width;
         }
-        /**
-         * Returns the height of the world in TILES
-         * @return
-         * 	The world height in tiles
-         */
-        public int getHeight()
+
+        /// <summary>
+        /// Returns the height of the world in TILES.
+        /// </summary>
+        public int GetHeight()
         {
             return height;
         }
-        /**
-         * Returns the player x axis spawn location in TIXELS
-         * @return
-         * 	The player spawn location in tixels
-         */
-        public int getSpawnX()
+
+        /// <summary>
+        /// Returns the player x axis spawn location in TIXELS.
+        /// </summary>
+        public int GetSpawnX()
         {
             return spawnX;
         }
-        /**
-         * Returns the player y axis spawn location in TIXELS
-         * @return
-         * 	The player spanw location in tixels
-         */
-        public int getSpawnY()
+
+        /// <summary>
+        /// Returns the player y axis spawn location in TIXELS.
+        /// </summary>
+        public int GetSpawnY()
         {
             return spawnY;
         }
-        /**
-         * Returns the entityManager containing all entities in the world
-         * @return
-         * 	The entityManager containing all entities
-         */
-        public EntityManager getEntityManager()
+
+        /// <summary>
+        /// Returns the entityManager containing all entities in the world.
+        /// </summary>
+        public EntityManager GetEntityManager()
         {
             return entityManager;
         }
-        /**
-         * Sets the entityManager that will contain all entities in the world
-         * @param entityManager
-         * 	The new entityManager containing all entities
-         */
-        public void setEntityManager(EntityManager entityManager)
+
+        /// <summary>
+        /// Sets the entityManager that will contain all entities in the world.
+        /// </summary>
+        /// <param name="entityManager">The entity manager to set.</param>
+        public void SetEntityManager(EntityManager entityManager)
         {
             this.entityManager = entityManager;
         }
 
+        #endregion
     }
 }

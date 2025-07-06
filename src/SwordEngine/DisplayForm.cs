@@ -21,7 +21,7 @@ namespace SwordEngine
             // Draws to the main screen.
             using (SKImage image = surface.Snapshot())
             using (SKData data = image.Encode())
-            using (System.IO.MemoryStream mStream = new System.IO.MemoryStream(data.ToArray()))
+            using (MemoryStream mStream = new MemoryStream(data.ToArray()))
             {
                 pictureBox1.Image?.Dispose();
                 pictureBox1.Image = new Bitmap(mStream, false);

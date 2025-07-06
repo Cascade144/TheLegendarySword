@@ -216,8 +216,6 @@ namespace SwordEngine.Entities.Creatures
             this.speed = speed;
         }
 
-        public abstract void SetNewWeapon(Weapon w);
-
         #endregion
     }
 }

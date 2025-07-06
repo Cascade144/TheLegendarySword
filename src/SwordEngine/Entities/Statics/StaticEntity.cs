@@ -1,6 +1,7 @@
 ﻿
 
 using SkiaSharp;
+using SwordEngine.Weapons;
 
 namespace SwordEngine.Entities.Statics
 {
@@ -27,6 +28,11 @@ namespace SwordEngine.Entities.Statics
         }
 
         public override void Render(SKCanvas canvas)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void SetNewWeapon(Weapon w)
         {
             throw new NotImplementedException();
         }

@@ -2,7 +2,6 @@
 using SwordEngine.Entities;
 using SwordEngine.Gfx;
 using SwordEngine.Tiles;
-using System.Drawing;
 
 namespace SwordEngine.Weapons
 {

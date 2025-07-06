@@ -182,7 +182,7 @@ namespace SwordEngine.Entities.Creatures
             currWeap = w;
         }
 
-        public void resetCurrWeap()
+        public void ResetCurrWeap()
         {
             currWeap = defaultDagger;
         }

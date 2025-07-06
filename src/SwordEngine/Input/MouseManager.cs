@@ -5,6 +5,7 @@ namespace SwordEngine.Input
 {
     public class MouseManager
     {
+        private IKeyboardMouseEvents? mouseKeyHook;
         public bool left, right;
         private int x, y;
 
@@ -15,13 +16,23 @@ namespace SwordEngine.Input
         public void Subscribe(IKeyboardMouseEvents events)
         {
             events.MouseDown += HookMouseDown;
-            events.MouseUpExt += HookMouseUp;
+            events.MouseUp += HookMouseUp;
             events.MouseMove += MouseMoved;
+        }
+
+        public void Unsubscribe()
+        {
+            if (mouseKeyHook == null) return;
+            mouseKeyHook.MouseDown -= HookMouseDown;
+            mouseKeyHook.MouseUp -= HookMouseUp;
+            mouseKeyHook.MouseMove -= MouseMoved;
+
+            mouseKeyHook.Dispose();
         }
 
         private void HookMouseUp(object? sender, MouseEventArgs e)
         {
-            Console.WriteLine($"MouseDown: {e.Button}");
+            Console.WriteLine($"MouseUp: {e.Button}");
             if (e.Button == MouseButtons.Left)
             {
                 left = false;

@@ -42,7 +42,7 @@ namespace SwordEngine.Entities
 
         public void update()
         {
-            foreach (var entity in entities)
+            foreach (Entity entity in entities.ToList())
             {
                 entity.Update();
                 if (!entity.IsAlive())
@@ -51,7 +51,7 @@ namespace SwordEngine.Entities
                 }
             }
 
-            foreach (var weapon in weapons)
+            foreach (Weapon weapon in weapons.ToList())
             {
                 weapon.Update(player);
                 if (weapon.IsPickedUp())
@@ -140,7 +140,7 @@ namespace SwordEngine.Entities
         /// Sets the player.
         /// </summary>
         /// <param name="player"></param>
-        public void setPlayer(Player player)
+        public void SetPlayer(Player player)
         {
             this.player = player;
         }
@@ -149,7 +149,7 @@ namespace SwordEngine.Entities
         /// <summary>
         /// Gets the entities
         /// </summary>
-        public List<Entity> getEntities()
+        public List<Entity> GetEntities()
         {
             return entities;
         }
@@ -157,7 +157,7 @@ namespace SwordEngine.Entities
         /// <summary>
         /// 
         /// </summary>
-        public List<Weapon> getWeapons()
+        public List<Weapon> GetWeapons()
         {
             return weapons;
         }

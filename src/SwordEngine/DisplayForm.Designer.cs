@@ -46,7 +46,10 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(600, 601);
             Controls.Add(pictureBox1);
+            MaximumSize = new Size(616, 640);
+            MinimumSize = new Size(616, 640);
             Name = "DisplayForm";
+            SizeGripStyle = SizeGripStyle.Hide;
             Text = "DisplayForm";
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);

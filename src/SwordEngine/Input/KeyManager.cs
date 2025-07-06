@@ -5,6 +5,8 @@ namespace SwordEngine.Input
 {
     public class KeyManager
     {
+        private IKeyboardMouseEvents? mouseKeyHook;
+
         /// <summary>
         /// Available keys to the key manager.
         /// </summary>
@@ -22,8 +24,19 @@ namespace SwordEngine.Input
 
         public void Subscribe(IKeyboardMouseEvents events)
         {
-            events.KeyUp += AppHookKeyup;
-            events.KeyDown += AppHookKeyDown;
+            mouseKeyHook = events;
+
+            mouseKeyHook.KeyUp += AppHookKeyup;
+            mouseKeyHook.KeyDown += AppHookKeyDown;
+        }
+
+        public void Unsubscribe()
+        {
+            if (mouseKeyHook == null) return;
+            mouseKeyHook.KeyUp -= AppHookKeyup;
+            mouseKeyHook.KeyDown -= AppHookKeyDown;
+
+            mouseKeyHook.Dispose();
         }
 
         private void AppHookKeyup(object? sender, KeyEventArgs e)
@@ -35,6 +48,8 @@ namespace SwordEngine.Input
             {
                 keys[releasedKey] = false;
             }
+
+            e.Handled = true;
         }
 
         private void AppHookKeyDown(object? sender, KeyEventArgs e)
@@ -51,6 +66,8 @@ namespace SwordEngine.Input
             {
                 keys[pressedKey] = true;
             }
+
+            e.Handled = true;
         }
 
         public void Update()

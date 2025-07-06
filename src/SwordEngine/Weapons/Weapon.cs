@@ -104,7 +104,7 @@ namespace SwordEngine.Weapons
             if (coolDown == -1)
             {
                 attacking = true;
-                foreach (Entity ent in handler.GetWorld().GetEntityManager().getEntities())
+                foreach (Entity ent in handler.GetWorld().GetEntityManager().GetEntities())
                 {
                     if (ent == e)
                     {
@@ -127,7 +127,7 @@ namespace SwordEngine.Weapons
         /// </summary>
         public virtual void Die()
         {
-            handler.GetWorld().GetEntityManager().GetPlayer().resetCurrWeap();
+            handler.GetWorld().GetEntityManager().GetPlayer().ResetCurrWeap();
         }
 
         /// <summary>

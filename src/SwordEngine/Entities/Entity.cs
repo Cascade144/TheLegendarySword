@@ -96,7 +96,7 @@ namespace SwordEngine.Entities
         /// <returns></returns>
         public bool checkEntityCollisions(float xOffset, float yOffset)
         {
-            foreach (Entity e in handler.GetWorld().GetEntityManager().getEntities())
+            foreach (Entity e in handler.GetWorld().GetEntityManager().GetEntities())
             {
                 // The entity is obviously going to collide with itself, ignore it
                 if (e == this)
@@ -128,8 +128,7 @@ namespace SwordEngine.Entities
         /// <returns></returns>
         public Rectangle GetCollisionBounds(float xOffset, float yOffset)
         {
-            return new Rectangle((int)(x + bounds.X + xOffset)
-                    , (int)(y + bounds.Y + yOffset), bounds.Width, bounds.Height);
+            return new Rectangle((int)(x + bounds.X + xOffset), (int)(y + bounds.Y + yOffset), bounds.Width, bounds.Height);
         }
 
         /// <summary>
@@ -276,10 +275,7 @@ namespace SwordEngine.Entities
         /// Sets a new weap for the entity.
         /// </summary>
         /// <param name="w">The weap to set.</param>
-        public void SetNewWeapon(Weapon w)
-        {
-            // blank
-        }
+        public abstract void SetNewWeapon(Weapon w);
 
         #endregion
     }

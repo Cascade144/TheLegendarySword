@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
+using Gma.System.MouseKeyHook;
 
 namespace SwordEngine
 {
@@ -103,6 +104,8 @@ namespace SwordEngine
 
         private DisplayForm windowForm;
 
+        private Stopwatch stopWatch;
+
         #endregion
 
         [DllImport("kernel32.dll", SetLastError = true)]
@@ -124,7 +127,12 @@ namespace SwordEngine
 
             keyManager = new KeyManager();
             mouseManager = new MouseManager();
-            windowForm.LoadKeyMouseListeners(keyManager, mouseManager);
+
+            keyManager.Unsubscribe();
+            mouseManager.Unsubscribe();
+
+            keyManager.Subscribe(Hook.GlobalEvents());
+            mouseManager.Subscribe(Hook.AppEvents());
         }
 
         /// <summary>
@@ -214,6 +222,7 @@ namespace SwordEngine
             titleState = new TitleState(handler);
             gameOverState = new GameOverState(handler);
             winState = new WinState(handler);
+            stopWatch = new Stopwatch();
             State.SetState(titleState);
         }
 
@@ -244,6 +253,8 @@ namespace SwordEngine
             else
             {
                 running = false;
+                keyManager.Unsubscribe();
+                mouseManager.Unsubscribe();
                 thread.Join();
             }
         }
@@ -269,7 +280,7 @@ namespace SwordEngine
             // The amount of time we have until we have to call the update/renders methods again.
             double delta = 0;
 
-            Stopwatch stopWatch = new Stopwatch();
+            // Start the timer.
             stopWatch.Start();
             int updates = 0; // how many times the update/render methods are called
 
@@ -277,9 +288,10 @@ namespace SwordEngine
             {
                 stopWatch.Stop();
                 TimeSpan ts = stopWatch.Elapsed;
+                stopWatch.Start();
 
                 // makes sure that delta is somewhere between 0 and 1
-                delta += ts.Nanoseconds / timePerUpdate;
+                delta += ts.TotalNanoseconds / timePerUpdate;
 
                 // check if you need to render something
                 if (delta >= 1)
@@ -291,11 +303,12 @@ namespace SwordEngine
                 }
 
                 // checks if the timer has exceeded 1 second
-                if (ts.Nanoseconds >= 1000000000)
+                if (ts.TotalNanoseconds >= 1000000000)
                 {
                     Console.WriteLine("Updates/Frames: " + updates);
                     //display.getFrame().setTitle((" | FPS - " + updates));
                     updates = 0;
+                    stopWatch.Reset();
                 }
             }
 

@@ -29,13 +29,13 @@ namespace SwordEngine.States
         /// <param name="handler"></param>
         public TitleState(Handler handler) : base(handler)
         {
-            img = SKImage.FromEncodedData("/textures/titleScreen.png");
+            img = SKImage.FromEncodedData("F:/source/TheLegendarySword/res/textures/titleScreen.png");
 
             // Create hitboxes for options.
-            start.width = 150;
-            start.height = 100;
-            start.x = 205;
-            start.y = 420;
+            start.Width = 150;
+            start.Height = 100;
+            start.X = 205;
+            start.Y = 420;
         }
 
         /**
@@ -45,7 +45,7 @@ namespace SwordEngine.States
         {
             if (CheckClick(start))
             {
-                State.setState(handler.getGame().getGameState());
+                SetState(handler.GetGame().GetGameState());
             }
         }
 
@@ -56,11 +56,12 @@ namespace SwordEngine.States
         public bool CheckClick(Rectangle check)
         {
             Rectangle cursor = new Rectangle();
-            cursor.x = handler.getMouseManager().getX();
-            cursor.y = handler.getMouseManager().getY();
-            cursor.width = 1;
-            cursor.height = 1;
-            if (cursor.intersects(check) && handler.getMouseManager().left)
+            cursor.X = handler.GetMouseManager().GetX();
+            cursor.Y = handler.GetMouseManager().GetY();
+            cursor.Width = 1;
+            cursor.Height = 1;
+            Console.WriteLine($"Check Click: X: {cursor.X}, Y: {cursor.Y}");
+            if (handler.GetMouseManager().left)
             {
                 return true;
             }
@@ -86,7 +87,7 @@ namespace SwordEngine.States
                 Style = SKPaintStyle.Stroke
             };
 
-            canvas.DrawRect(0, 0, handler.getWidth(), handler.getHeight(), RectPaint);
+            canvas.DrawRect(0, 0, handler.GetWidth(), handler.GetHeight(), RectPaint);
 
             SKPoint sKPoint = new SKPoint();
             canvas.DrawImage(img, sKPoint);

@@ -18,7 +18,7 @@ namespace SwordEngine.States
         /// <param name="handler"></param>
         public WinState(Handler handler) : base(handler)
         {
-            SKImage img = SKImage.FromEncodedData("/textures/winScreen.png");
+            SKImage img = SKImage.FromEncodedData("F:/source/TheLegendarySword/res/textures/winScreen.png");
             bitmap = SKBitmap.FromImage(img);
         }
 
@@ -46,7 +46,7 @@ namespace SwordEngine.States
                 Style = SKPaintStyle.Stroke
             };
 
-            canvas.DrawRect(0, 0, handler.getWidth(), handler.getHeight(), RectPaint);
+            canvas.DrawRect(0, 0, handler.GetWidth(), handler.GetHeight(), RectPaint);
             SKPoint sKPoint = new SKPoint();
             canvas.DrawBitmap(bitmap, sKPoint);
         }

@@ -1,5 +1,4 @@
 ﻿using SkiaSharp;
-using System.ComponentModel;
 
 namespace SwordEngine.States
 {
@@ -20,7 +19,7 @@ namespace SwordEngine.States
         /// <param name="handler">The generic game handler.</param>
         public Settings(Handler handler): base(handler)
         {
-            SKImage img = SKImage.FromEncodedData("/textures/testSettings.png");
+            SKImage img = SKImage.FromEncodedData("F:/source/TheLegendarySword/res/textures/testSettings.png");
             bitmap = SKBitmap.FromImage(img);
         }
 
@@ -31,9 +30,9 @@ namespace SwordEngine.States
         /// </summary>
         public override void Update()
         {
-            if (!(handler.getKeyManager().pause))
+            if (!(handler.GetKeyManager().pause))
             {
-                setState(handler.getGame().getGameState());
+                SetState(handler.GetGame().GetGameState());
             }
         }
 
@@ -56,7 +55,7 @@ namespace SwordEngine.States
                 Style = SKPaintStyle.Stroke
             };
 
-            canvas.DrawRect(0, 0, handler.getWidth(), handler.getHeight(), RectPaint);
+            canvas.DrawRect(0, 0, handler.GetWidth(), handler.GetHeight(), RectPaint);
             SKPoint sKPoint = new SKPoint();
             canvas.DrawBitmap(bitmap, sKPoint);
 

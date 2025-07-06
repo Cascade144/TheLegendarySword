@@ -80,8 +80,8 @@ namespace SwordEngine.Tiles
         public void Render(SKCanvas canvas, int x, int y)
         {
             SKPoint sKPoint = new SKPoint(x, y);
-            SKRect sKRect = SKRect.Create(TILEWIDTH, TILEHEIGHT);
-            canvas.DrawBitmap(texture, sKPoint, new SKPaint());
+            SKRect sKRect = SKRect.Create(x, y, TILEWIDTH, TILEHEIGHT);
+            canvas.DrawBitmap(texture, sKRect, new SKPaint());
         }
 
         /// <summary>

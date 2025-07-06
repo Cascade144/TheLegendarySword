@@ -1,12 +1,16 @@
-﻿using System.Drawing;
-using SwordEngine.States;
+﻿using SwordEngine.States;
 using SwordEngine.Gfx;
+using SkiaSharp;
+using SwordEngine.Input;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Runtime.InteropServices;
+using System.Diagnostics;
 
 namespace SwordEngine
 {
     public class MainGame
     {
-
         #region Graphics
 
         /// <summary>
@@ -32,12 +36,22 @@ namespace SwordEngine
         /// <summary>
         /// The main graphics object.
         /// </summary>
-        private Graphics g;
+        private SKCanvas canvas;
 
         /// <summary>
-        /// The main buffer strategy.
+        /// The main surface.
         /// </summary>
-        //private BufferStrategy bs;
+        private SKSurface surface;
+        
+        /// <summary>
+        /// The game engine Key Manager.
+        /// </summary>
+        private KeyManager keyManager;
+
+        /// <summary>
+        /// The game engine Mouse Manager.
+        /// </summary>
+        private MouseManager mouseManager;
 
         #endregion
 
@@ -87,21 +101,30 @@ namespace SwordEngine
         /// </summary>
         private State winState;
 
+        private DisplayForm windowForm;
+
         #endregion
+
+        [DllImport("kernel32.dll", SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        static extern bool AllocConsole();
 
         /// <summary>
         /// Constructs the MainGame object, and sets the default values of the window
         /// </summary>
         /// <param name="width"></param>
         /// <param name="height"></param>
-        public MainGame(int width, int height)
+        public MainGame(int width, int height, DisplayForm windowForm)
         {
-
+            // Render Console
+            AllocConsole();
             this.width = width;
             this.height = height;
+            this.windowForm = windowForm;
 
-            //keyManager = new KeyManager();
-            //mouseManager = new MouseManager();
+            keyManager = new KeyManager();
+            mouseManager = new MouseManager();
+            windowForm.LoadKeyMouseListeners(keyManager, mouseManager);
         }
 
         /// <summary>
@@ -109,33 +132,40 @@ namespace SwordEngine
         /// </summary>
         private void update()
         {
-            keyManager.update();
-            if (State.getState() == titleState)
+            keyManager.Update();
+            if (State.GetState() == titleState)
             {
-                State.setState(titleState);
+                State.SetState(titleState);
             }
             else
             {
-                if (State.getState() == winState)
+                if (State.GetState() == winState)
                 {
-                    State.setState(winState);
+                    State.SetState(winState);
                 }
                 else
                 {
-                    if (State.getState() == gameOverState)
-                        State.setState(gameOverState);
+                    if (State.GetState() == gameOverState)
+                    {
+                        State.SetState(gameOverState);
+                    }
                     else
                     {
                         if (keyManager.pause)
-                            State.setState(settingsState);
+                        {
+                            State.SetState(settingsState);
+                        }
                         else
-                            State.setState(gameState);
+                        {
+                            State.SetState(gameState);
+                        }
                     }
                 }
             }
-            if (State.getState() != null)
+
+            if (State.GetState() != null)
             {
-                State.getState().Update();
+                State.GetState().Update();
             }
         }
 
@@ -146,32 +176,23 @@ namespace SwordEngine
         /// Finally it draws whatever was rendered onto the screen.
         /// If there isn't a state in the variable, then it does nothing.
         /// </summary>
-        private void render()
+        private void Render()
         {
-            // Gets the amount of buffers the canvas is going to use.
-            bs = display.GetCanvas().getBufferStrategy();
-
-            // If there isn't any buffers get 3 buffers.
-            if (bs == null)
-            {
-                display.GetCanvas().createBufferStrategy(3);
-                return;
-            }
-
-            g = bs.getDrawGraphics();
+            // Gets the canvas
+            canvas = display.GetCanvas();
+            surface = display.GetSurface();
 
             // Clear the current screen.
-            g.clearRect(0, 0, width, height);
+            canvas.Clear();
 
             // Render the game.
-            if (State.getState() != null)
+            if (State.GetState() != null)
             {
-                State.getState().render(g);
+                State.GetState().Render(canvas);
             }
 
             // Draws to the main screen.
-            bs.show();
-            g.dispose();
+            windowForm.RenderExternalCall(surface);
         }
 
         /// <summary>
@@ -182,11 +203,6 @@ namespace SwordEngine
         {
 
             display = new Display.Display(width, height);
-            //display.GetSurface().addKeyListener(keyManager);
-            //display.GetSurface().addMouseMotionListener(mouseManager);
-            //display.GetSurface().addMouseListener(mouseManager);
-            //display.GetCanvas().addMouseMotionListener(mouseManager);
-            //display.GetCanvas().addMouseListener(mouseManager);
             Assets.init();
 
             handler = new Handler(this);
@@ -198,7 +214,7 @@ namespace SwordEngine
             titleState = new TitleState(handler);
             gameOverState = new GameOverState(handler);
             winState = new WinState(handler);
-            State.setState(titleState);
+            State.SetState(titleState);
         }
 
         /// <summary>
@@ -207,10 +223,13 @@ namespace SwordEngine
         public void Start()
         {
             if (running)
+            {
                 return;
+            }
+
             running = true;
-            thread = new Thread();
-            thread.start();
+            thread = new Thread(() => Run());
+            thread.Start();
         }
 
         /// <summary>
@@ -219,9 +238,14 @@ namespace SwordEngine
         public void Stop()
         {
             if (!running)
+            {
                 return;
-
-            // Stop main game thread here.
+            } 
+            else
+            {
+                running = false;
+                thread.Join();
+            }
         }
 
         /**
@@ -244,40 +268,34 @@ namespace SwordEngine
 
             // The amount of time we have until we have to call the update/renders methods again.
             double delta = 0;
-            long now;   // the computer's current time (in nanoseconds)
-            long lastTime = DateTime.Now.Ticks; // the last time we called this method
 
-            long timer = 0; // times until we get to one seconds	
+            Stopwatch stopWatch = new Stopwatch();
+            stopWatch.Start();
             int updates = 0; // how many times the update/render methods are called
 
             while (running)
             {
-                now = DateTime.Now.Ticks; // set the current time
+                stopWatch.Stop();
+                TimeSpan ts = stopWatch.Elapsed;
 
                 // makes sure that delta is somewhere between 0 and 1
-                delta += (now - lastTime) / timePerUpdate;
-
-                // adds the amount of nanoseconds that have passed since this 
-                // method has been called
-                timer += now - lastTime;
-                lastTime = now;
+                delta += ts.Nanoseconds / timePerUpdate;
 
                 // check if you need to render something
                 if (delta >= 1)
                 {
                     update();
-                    render();
+                    Render();
                     updates++;
                     delta--;
                 }
 
                 // checks if the timer has exceeded 1 second
-                if (timer >= 1000000000)
+                if (ts.Nanoseconds >= 1000000000)
                 {
-                    //System.out.println("Updates/Frames: " + updates);
-                    display.getFrame().setTitle((" | FPS - " + updates));
+                    Console.WriteLine("Updates/Frames: " + updates);
+                    //display.getFrame().setTitle((" | FPS - " + updates));
                     updates = 0;
-                    timer = 0;
                 }
             }
 
@@ -289,23 +307,23 @@ namespace SwordEngine
         /// <summary>
         /// Returns the MainGame keyManager.
         /// </summary>
-        //public KeyManager getKeyManager()
-        //{
-        //    return keyManager;
-        //}
+        public KeyManager GetKeyManager()
+        {
+            return keyManager;
+        }
 
         /// <summary>
         /// Returns the MainGame mouse Manager.
         /// </summary>
-        //public MouseManager getMouseManager()
-        //{
-        //    return mouseManager;
-        //}
+        public MouseManager GetMouseManager()
+        {
+            return mouseManager;
+        }
 
         /// <summary>
         /// Returns the MainGame Game Camera.
         /// </summary>
-        public GameCamera getGameCamera()
+        public GameCamera GetGameCamera()
         {
             return gameCamera;
         }
@@ -313,16 +331,15 @@ namespace SwordEngine
         /// <summary>
         ///  Returns the window's width in pixels.
         /// </summary>
-        public int getWidth()
+        public int GetWidth()
         {
             return width;
         }
 
-
         /// <summary>
         /// Returns the window's height in pixels.
         /// </summary>
-        public int getHeight()
+        public int GetHeight()
         {
             return height;
         }
@@ -330,7 +347,7 @@ namespace SwordEngine
         /// <summary>
         /// Returns the game state
         /// </summary>
-        public State getGameState()
+        public State GetGameState()
         {
             return gameState;
         }
@@ -338,7 +355,7 @@ namespace SwordEngine
         /// <summary>
         /// Returns the setting state
         /// </summary>
-        public State getSettingsState()
+        public State GetSettingsState()
         {
             return settingsState;
         }
@@ -346,7 +363,7 @@ namespace SwordEngine
         /// <summary>
         /// Returns the game over state.
         /// </summary>
-        public State getGameOverState()
+        public State GetGameOverState()
         {
             return gameOverState;
         }
@@ -354,7 +371,7 @@ namespace SwordEngine
         /// <summary>
         /// Returns the win state.
         /// </summary>
-        public State getWinState()
+        public State GetWinState()
         {
             return winState;
         }

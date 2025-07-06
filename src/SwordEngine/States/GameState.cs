@@ -1,6 +1,5 @@
 ﻿using SkiaSharp;
 using SwordEngine.World;
-using System.Drawing;
 
 namespace SwordEngine.States
 {
@@ -18,21 +17,22 @@ namespace SwordEngine.States
         /// <param name="handler">The game handler.</param>
         public GameState(Handler handler) : base(handler)
         {
-            world = new World.World(handler, "res/worlds/world1.txt");
-            handler.setWorld(world);
+            world = new World.World(handler, "F:/source/TheLegendarySword/res/worlds/world1.txt");
+            handler.SetWorld(world);
         }
 
-        /**
-         * Calls the world object's update method.
-         */
+        /// <summary>
+        /// Calls the world object's update method.
+        /// </summary>
         public override void Update()
         {
             world.Update();
         }
 
-        /**
-         * Calls the world object's render method.
-         */
+        /// <summary>
+        /// Calls the world object's render method.
+        /// </summary>
+        /// <param name="canvas"></param>
         public override void Render(SKCanvas canvas)
         {
             world.Render(canvas);

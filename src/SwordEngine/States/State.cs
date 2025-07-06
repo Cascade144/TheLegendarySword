@@ -1,5 +1,4 @@
 ﻿using SkiaSharp;
-using System.Drawing;
 
 namespace SwordEngine.States
 {
@@ -11,7 +10,7 @@ namespace SwordEngine.States
         /// <summary>
         /// The current state the game is in.
         /// </summary>
-        private static State currentState = null;
+        private static State? currentState = null;
 
         /// <summary>
         /// The Main handler.
@@ -30,18 +29,16 @@ namespace SwordEngine.States
         /// Sets the current state that the game is in.
         /// </summary>
         /// <param name="state">The state to set.</param>
-        public static void setState(State state)
+        public static void SetState(State state)
         {
-
             currentState = state;
         }
 
         /// <summary>
         /// Returns the current state the game is in.
         /// </summary>
-        public static State getState()
+        public static State GetState()
         {
-
             return currentState;
         }
 

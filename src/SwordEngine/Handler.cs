@@ -1,4 +1,5 @@
 ﻿using SwordEngine.Gfx;
+using SwordEngine.Input;
 
 namespace SwordEngine
 {
@@ -30,34 +31,34 @@ namespace SwordEngine
         /// <summary>
         /// Returns the window's width in pixels
         /// </summary>
-        public int getWidth()
+        public int GetWidth()
         {
-            return mainGame.getWidth();
+            return mainGame.GetWidth();
         }
 
         /// <summary>
         /// Returns the window's height in pixels
         /// </summary>
         /// <returns></returns>
-        public int getHeight()
+        public int GetHeight()
         {
-            return mainGame.getHeight();
+            return mainGame.GetHeight();
         }
 
         /// <summary>
         /// Returns the mainGame keyManager.
         /// </summary>
-        public KeyManager getKeyManager()
+        public KeyManager GetKeyManager()
         {
-            return mainGame.getKeyManager();
+            return mainGame.GetKeyManager();
         }
 
         /// <summary>
         /// Returns the mainGame mouseManager
         /// </summary>
-        public MouseManager getMouseManager()
+        public MouseManager GetMouseManager()
         {
-            return mainGame.getMouseManager();
+            return mainGame.GetMouseManager();
         }
 
         /// <summary>
@@ -65,13 +66,13 @@ namespace SwordEngine
         /// </summary>
         public GameCamera GetGameCamera()
         {
-            return mainGame.getGameCamera();
+            return mainGame.GetGameCamera();
         }
 
         /// <summary>
         /// Returns the MainGame object itself.
         /// </summary>
-        public MainGame getGame()
+        public MainGame GetGame()
         {
             return mainGame;
         }
@@ -80,9 +81,9 @@ namespace SwordEngine
         /// Sets the MainGame object to whatever is passed in
         /// </summary>
         /// <param name="game">The main game object.</param>
-        public void setGame(MainGame game)
+        public void SetGame(MainGame game)
         {
-            this.mainGame = game;
+            mainGame = game;
         }
 
         /// <summary>

@@ -51,6 +51,8 @@ namespace SwordEngine.Display
             SKImageInfo imageInfo = new SKImageInfo();
             imageInfo.Width = width;
             imageInfo.Height = height;
+            imageInfo.ColorType = SKColorType.Rgba8888;
+            imageInfo.AlphaType = SKAlphaType.Opaque;
 
             frame = SKSurface.Create(imageInfo);
 
@@ -71,7 +73,7 @@ namespace SwordEngine.Display
         /// <summary>
         /// Returns the SKSurface's Canvas.
         /// </summary>
-        public SKCanvas getCanvas()
+        public SKCanvas GetCanvas()
         {
             return canvas;
         }
@@ -79,7 +81,7 @@ namespace SwordEngine.Display
         /// <summary>
         /// Returns the SKSurface.
         /// </summary>
-        public SKSurface getSurface()
+        public SKSurface GetSurface()
         {
             return frame;
         }

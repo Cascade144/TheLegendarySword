@@ -1,9 +1,12 @@
-﻿using SkiaSharp;
+﻿using Microsoft.VisualBasic;
+using SkiaSharp;
 using SwordEngine.Entities;
 using SwordEngine.Entities.Creatures;
 using SwordEngine.Entities.Statics;
 using SwordEngine.Tiles;
 using SwordEngine.Weapons;
+using System.IO;
+using System.Text.RegularExpressions;
 
 namespace SwordEngine.World
 {
@@ -35,7 +38,7 @@ namespace SwordEngine.World
         /// A multidimensional array containing the layout of the entire world, 
         /// determined by the world file
         /// </summary>
-        private int[][] wTiles;
+        private int[,] wTiles;
 
         #region Entities
 
@@ -53,7 +56,7 @@ namespace SwordEngine.World
         /// </summary>
         /// <param name="handler">The main game handler.</param>
         /// <param name="path">The file path.</param>
-        public World(Handler handler, String path)
+        public World(Handler handler, string path)
         {
             this.handler = handler;
             //All enemies
@@ -81,8 +84,8 @@ namespace SwordEngine.World
 
             loadWorld(path);
 
-            entityManager.getPlayer().setX(spawnX);
-            entityManager.getPlayer().setY(spawnY);
+            entityManager.GetPlayer().SetX(spawnX);
+            entityManager.GetPlayer().SetY(spawnY);
         }
 
         /// <summary>
@@ -104,17 +107,18 @@ namespace SwordEngine.World
             // Render Tiles first.
             int xStart = (int)Math.Max(0, handler.GetGameCamera().GetXOffset() / Tile.TILEWIDTH);
             int xEnd = (int)Math.Min(width
-                    , (handler.GetGameCamera().GetXOffset() + handler.getWidth()) / Tile.TILEWIDTH + 1);
+                    , (handler.GetGameCamera().GetXOffset() + handler.GetWidth()) / Tile.TILEWIDTH + 1);
             int yStart = (int)Math.Max(0, handler.GetGameCamera().GetYOffset() / Tile.TILEHEIGHT);
             int yEnd = (int)Math.Min(height
-                    , (handler.GetGameCamera().GetYOffset() + handler.getHeight()) / Tile.TILEHEIGHT + 1);
+                    , (handler.GetGameCamera().GetYOffset() + handler.GetHeight()) / Tile.TILEHEIGHT + 1);
 
             for (int y = yStart; y < yEnd; y++)
             {
                 for (int x = xStart; x < xEnd; x++)
                 {
-                    getTile(x, y).Render(canvas, (int)(x * Tile.TILEWIDTH - handler.GetGameCamera().GetXOffset())
-                            , (int)(y * Tile.TILEHEIGHT - handler.GetGameCamera().GetYOffset()));
+                    int xRender = (int)(x * Tile.TILEWIDTH - handler.GetGameCamera().GetXOffset());
+                    int yRender = (int)(y * Tile.TILEHEIGHT - handler.GetGameCamera().GetYOffset());
+                    GetTile(x, y).Render(canvas, xRender, yRender);
                 }
             }
 
@@ -122,52 +126,51 @@ namespace SwordEngine.World
             entityManager.render(canvas);
         }
 
-        /**
-         * Returns the Tile object at the given TILE location
-         * @param x
-         * 	The location of the tile on the x axis, in TILES
-         * @param y
-         * 	The location of the tile on the y axis, in TILES
-         * @return
-         * 	The Tile object at the specified location
-         */
-        public Tile getTile(int x, int y)
+        /// <summary>
+        /// Returns the Tile object at the given TILE location
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        public Tile GetTile(int x, int y)
         {
 
             if (x < 0 || y < 0 || x >= width || y >= height)
+            {
                 return Tile.grassTile;
+            }
 
-            Tile t = Tile.mTiles[wTiles[x][y]];
+            Tile t = Tile.mTiles[wTiles[x, y]];
             if (t == null)
+            {
                 return Tile.grassTile;
+            }
 
             return t;
         }
 
-        /**
-         * Loads the world from the given world file path (parses through the file)
-         * Determines the width/height of the world in TILES
-         * Determines the spawn location of the player in TIXELS
-         * Saves the tile information into the wTiles array
-         * @param path
-         * 	The File path of the world
-         */
-        private void loadWorld(String path)
+        /// <summary>
+        /// Loads the world from the given world file path (parses through the file)
+        /// Determines the width/height of the world in TILES 
+        /// Determines the spawn location of the player in TIXELS
+        /// Saves the tile information into the wTiles array
+        /// </summary>
+        /// <param name="path"></param>
+        private void loadWorld(string path)
         {
-            String file = Utils.loadFileAsString(path);
-            String[] tokens = file.split("\\s+"); // split on whitespace
+            string file = File.ReadAllText(path);
+            string[] tokens = Regex.Split(file, "\\s+"); ; // split on whitespace
 
             width = int.Parse(tokens[0]);
             height = int.Parse(tokens[1]);
             spawnX = int.Parse(tokens[2]) * Tile.TILEWIDTH;
             spawnY = int.Parse(tokens[3]) * Tile.TILEHEIGHT;
 
-            wTiles = new int[width][height];
+            wTiles = new int[width, height];
             for (int y = 0; y < height; y++)
             {
                 for (int x = 0; x < width; x++)
                 {
-                    wTiles[x][y] = int.Parse(tokens[(x + y * width) + 4]);
+                    wTiles[x, y] = int.Parse(tokens[(x + y * width) + 4]);
                 }
             }
 
@@ -175,7 +178,6 @@ namespace SwordEngine.World
 
         public void teleport()
         {
-
         }
 
         #region Getters and Setters

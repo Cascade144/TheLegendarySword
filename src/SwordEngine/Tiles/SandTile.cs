@@ -1,4 +1,6 @@
-﻿namespace SwordEngine.Tiles
+﻿using SwordEngine.Gfx;
+
+namespace SwordEngine.Tiles
 {
     public class SandTile : Tile
     {

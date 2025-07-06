@@ -11,8 +11,9 @@ public class Program
     /// <param name="args"></param>
     public static void Main(string[] args)
     {
-        MainGame game = new MainGame(600, 600);
-
-        game.Start();
+        Application.EnableVisualStyles();
+        Application.SetCompatibleTextRenderingDefault(false);
+        DisplayForm windowForm = new DisplayForm();
+        Application.Run(windowForm);
     }
 }

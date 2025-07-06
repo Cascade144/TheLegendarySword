@@ -1,4 +1,5 @@
 ﻿using SwordEngine.Entities;
+using SwordEngine.Tiles;
 
 namespace SwordEngine.Gfx
 {
@@ -41,18 +42,18 @@ namespace SwordEngine.Gfx
             {
                 xOffset = 0;
             }
-            else if (xOffset > handler.getWorld().getWidth() * Tile.Tile.TILEWIDTH - handler.getWidth())
+            else if (xOffset > handler.GetWorld().GetWidth() * Tile.TILEWIDTH - handler.GetWidth())
             {
-                xOffset = handler.getWorld().getWidth() * Tile.Tile.TILEWIDTH - handler.getWidth();
+                xOffset = handler.GetWorld().GetWidth() * Tile.TILEWIDTH - handler.GetWidth();
             }
 
             if (yOffset < 0)
             {
                 yOffset = 0;
             }
-            else if (yOffset > handler.getWorld().getHeight() * Tile.Tile.TILEHEIGHT - handler.getHeight())
+            else if (yOffset > handler.GetWorld().GetHeight() * Tile.TILEHEIGHT - handler.GetHeight())
             {
-                yOffset = handler.getWorld().getHeight() * Tile.Tile.TILEHEIGHT - handler.getHeight();
+                yOffset = handler.GetWorld().GetHeight() * Tile.TILEHEIGHT - handler.GetHeight();
             }
         }
 
@@ -60,10 +61,10 @@ namespace SwordEngine.Gfx
         /// Moves the camera so that the window is always centered on the given entity e
         /// </summary>
         /// <param name="e">The entity to center on.</param>
-        public void centerOnEntity(Entity e)
+        public void CenterOnEntity(Entity e)
         {
-            xOffset = e.getX() - handler.getWidth() / 2 + e.getWidth();
-            yOffset = e.getY() - handler.getHeight() / 2 + e.getHeight();
+            xOffset = e.GetX() - handler.GetWidth() / 2 + e.GetWidth();
+            yOffset = e.GetY() - handler.GetHeight() / 2 + e.SetHeight();
             checkBlankSpace();
         }
 
@@ -85,7 +86,7 @@ namespace SwordEngine.Gfx
         /// <summary>
         /// Returns the xOffset in tixels
         /// </summary>
-        public float getxOffset()
+        public float GetXOffset()
         {
             return xOffset;
         }
@@ -96,7 +97,7 @@ namespace SwordEngine.Gfx
         /// and checks for blank space.
         /// </summary>
         /// <param name="xOffset">The new offset in tixels.</param>
-        public void setxOffset(float xOffset)
+        public void SetXOffset(float xOffset)
         {
             this.xOffset = xOffset;
             checkBlankSpace();
@@ -106,7 +107,7 @@ namespace SwordEngine.Gfx
         /// Returns the yOffset in tixels.
         /// </summary>
         /// <returns>The new offset in tixels.</returns>
-        public float getyOffset()
+        public float GetYOffset()
         {
             return yOffset;
         }
@@ -115,10 +116,12 @@ namespace SwordEngine.Gfx
         /// Sets the yOffset value to the given tixel amount
         /// </summary>
         /// <param name="yOffset">The offset in tixels to set.</param>
-        public void setyOffset(float yOffset)
+        public void SetYOffset(float yOffset)
         {
             this.yOffset = yOffset;
             checkBlankSpace();
         }
+
+        #endregion
     }
 }

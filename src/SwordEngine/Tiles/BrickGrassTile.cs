@@ -1,4 +1,5 @@
-﻿
+﻿using SwordEngine.Gfx;
+
 namespace SwordEngine.Tiles
 {
     public class BrickGrassTile : Tile

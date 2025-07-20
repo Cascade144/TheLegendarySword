@@ -11,6 +11,7 @@ namespace SwordEngine.Weapons
         public Spear(Handler handler, int width, int height, float x, float y) : base(handler, width, height)
         {
             displayTexture = Assets.spear[0];
+            attkTexture = Assets.spear[1];
             this.x = x;
             this.y = y;
             damage = 3;
@@ -19,7 +20,7 @@ namespace SwordEngine.Weapons
         public override void Update(Entity e)
         {
             Rectangle c = e.GetCollisionBounds(0, 0);
-            if (pickedUp)
+            if (pickedUp && Assets.spear != null)
             {
                 switch (e.GetLastDirection())
                 {

@@ -3,3 +3,7 @@ src/SwordEngine/.vs/
 src/SwordEngine/obj/
 
 src/SwordEngine/bin/
+
+installer/*.exe
+artifacts/*/*.exe
+artifacts/*/*.pdb

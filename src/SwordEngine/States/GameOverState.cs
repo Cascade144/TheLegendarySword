@@ -1,4 +1,5 @@
 ﻿using SkiaSharp;
+using SwordEngine.Utilities;
 
 namespace SwordEngine.States
 {
@@ -18,7 +19,8 @@ namespace SwordEngine.States
         /// <param name="handler"></param>
         public GameOverState(Handler handler) : base(handler)
         {
-            SKImage img = SKImage.FromEncodedData("F:/source/TheLegendarySword/res/textures/loseScreen.png");
+            var losePath = ResourcePaths.ResolveResourcePath("res", "textures", "loseScreen.png");
+            SKImage img = SKImage.FromEncodedData(losePath);
             bitmap = SKBitmap.FromImage(img);
         }
 

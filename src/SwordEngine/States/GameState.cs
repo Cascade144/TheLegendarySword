@@ -1,4 +1,5 @@
 ﻿using SkiaSharp;
+using SwordEngine.Utilities;
 using SwordEngine.World;
 
 namespace SwordEngine.States
@@ -17,7 +18,8 @@ namespace SwordEngine.States
         /// <param name="handler">The game handler.</param>
         public GameState(Handler handler) : base(handler)
         {
-            world = new World.World(handler, "F:/source/TheLegendarySword/res/worlds/world1.txt");
+            var worldPath = ResourcePaths.ResolveResourcePath("res", "worlds", "world1.txt");
+            world = new World.World(handler, worldPath);
             handler.SetWorld(world);
         }
 

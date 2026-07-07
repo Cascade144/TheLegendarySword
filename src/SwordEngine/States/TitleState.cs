@@ -1,4 +1,5 @@
 ﻿using SkiaSharp;
+using SwordEngine.Utilities;
 using System.Drawing;
 
 namespace SwordEngine.States
@@ -29,7 +30,8 @@ namespace SwordEngine.States
         /// <param name="handler"></param>
         public TitleState(Handler handler) : base(handler)
         {
-            img = SKImage.FromEncodedData("F:/source/TheLegendarySword/res/textures/titleScreen.png");
+            var titlePath = ResourcePaths.ResolveResourcePath("res", "textures", "titleScreen.png");
+            img = SKImage.FromEncodedData(titlePath);
 
             // Create hitboxes for options.
             start.Width = 150;

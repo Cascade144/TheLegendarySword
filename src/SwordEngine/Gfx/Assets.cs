@@ -1,4 +1,5 @@
 ﻿using SkiaSharp;
+using SwordEngine.Utilities;
 
 namespace SwordEngine.Gfx
 {
@@ -50,8 +51,10 @@ namespace SwordEngine.Gfx
         /// </summary>
         public static void init()
         {
+            var texturesPath = ResourcePaths.ResolveResourcePath("res", "textures");
+
             // Finds a tile sheet from resources folder.
-            SKImage spriteSheetWorld1 = SKImage.FromEncodedData(@"F:/source/TheLegendarySword/res/textures/world1tileSheet.png");
+            SKImage spriteSheetWorld1 = SKImage.FromEncodedData(Path.Combine(texturesPath, "world1tileSheet.png"));
             SKBitmap bitmapWorld1 = SKBitmap.FromImage(spriteSheetWorld1);
             SpriteSheet world1 = new SpriteSheet(bitmapWorld1);
 
@@ -67,7 +70,7 @@ namespace SwordEngine.Gfx
             sand = world1.Crop(width * 3, height, width, height);
 
             // Sprites for world2 tilesheet.
-            SKImage spriteSheetWorld2 = SKImage.FromEncodedData("F:/source/TheLegendarySword/res/textures/world2tileSheet.png");
+            SKImage spriteSheetWorld2 = SKImage.FromEncodedData(Path.Combine(texturesPath, "world2tileSheet.png"));
             SKBitmap bitmapWorld2 = SKBitmap.FromImage(spriteSheetWorld1);
             SpriteSheet world2 = new SpriteSheet(bitmapWorld2);
             cFloor = world2.Crop(0, 0, width, height);
@@ -79,7 +82,7 @@ namespace SwordEngine.Gfx
             cWall = world2.Crop(0, height, width, height);
 
             //Finds a creature sheet from resources folder
-            SKImage spriteSheetCreature = SKImage.FromEncodedData("F:/source/TheLegendarySword/res/textures/creatureSheet.png");
+            SKImage spriteSheetCreature = SKImage.FromEncodedData(Path.Combine(texturesPath, "creatureSheet.png"));
             SKBitmap bitmapCreature = SKBitmap.FromImage(spriteSheetCreature);
             SpriteSheet creatureSheet = new SpriteSheet(bitmapCreature);
 
@@ -90,19 +93,19 @@ namespace SwordEngine.Gfx
             snake = creatureSheet.Crop(width * 3, 0, width, height);
 
             // Load Character sheet.
-            SKImage spriteSheetChar = SKImage.FromEncodedData("F:/source/TheLegendarySword/res/textures/characterSheet.png");
+            SKImage spriteSheetChar = SKImage.FromEncodedData(Path.Combine(texturesPath, "characterSheet.png"));
             SKBitmap bitmapChar = SKBitmap.FromImage(spriteSheetChar);
             SpriteSheet sheet3 = new SpriteSheet(bitmapChar);
             player = sheet3.Crop(0, 0, width, height);
 
             // Load Object sheet.
-            SKImage spriteSheetObject = SKImage.FromEncodedData("F:/source/TheLegendarySword/res/textures/objectSheet.png");
+            SKImage spriteSheetObject = SKImage.FromEncodedData(Path.Combine(texturesPath, "objectSheet.png"));
             SKBitmap bitmapObject = SKBitmap.FromImage(spriteSheetObject);
             SpriteSheet sheet4 = new SpriteSheet(bitmapObject);
             chest = sheet4.Crop(0, 0, width, height);
 
             // Load Weap sheet
-            SKImage spriteSheetWeap = SKImage.FromEncodedData("F:/source/TheLegendarySword/res/textures/weaponTiles.png");
+            SKImage spriteSheetWeap = SKImage.FromEncodedData(Path.Combine(texturesPath, "weaponTiles.png"));
             SKBitmap bitmapWeap= SKBitmap.FromImage(spriteSheetWeap);
             SpriteSheet weapon = new SpriteSheet(bitmapWeap);
 

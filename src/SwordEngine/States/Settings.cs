@@ -1,4 +1,5 @@
 ﻿using SkiaSharp;
+using SwordEngine.Utilities;
 
 namespace SwordEngine.States
 {
@@ -19,7 +20,8 @@ namespace SwordEngine.States
         /// <param name="handler">The generic game handler.</param>
         public Settings(Handler handler): base(handler)
         {
-            SKImage img = SKImage.FromEncodedData("F:/source/TheLegendarySword/res/textures/testSettings.png");
+            var settingsPath = ResourcePaths.ResolveResourcePath("res", "textures", "testSettings.png");
+            SKImage img = SKImage.FromEncodedData(settingsPath);
             bitmap = SKBitmap.FromImage(img);
         }
 

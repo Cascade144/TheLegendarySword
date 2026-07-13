@@ -50,7 +50,7 @@
             MinimumSize = new Size(616, 640);
             Name = "DisplayForm";
             SizeGripStyle = SizeGripStyle.Hide;
-            Text = "DisplayForm";
+            Text = "SwordEngine";
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
         }

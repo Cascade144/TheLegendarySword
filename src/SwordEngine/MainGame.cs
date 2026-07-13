@@ -112,6 +112,16 @@ namespace SwordEngine
         [return: MarshalAs(UnmanagedType.Bool)]
         static extern bool AllocConsole();
 
+        private void OnWindowDeactivate(object? sender, EventArgs e)
+        {
+            keyManager.ClearAllKeys();
+        }
+
+        private void OnWindowActivate(object? sender, EventArgs e)
+        {
+            keyManager.ClearAllKeys();
+        }
+
         /// <summary>
         /// Constructs the MainGame object, and sets the default values of the window
         /// </summary>
@@ -119,8 +129,10 @@ namespace SwordEngine
         /// <param name="height"></param>
         public MainGame(int width, int height, DisplayForm windowForm)
         {
-            // Render Console
+#if DEBUG
+            // Render Console (only in Debug mode)
             AllocConsole();
+#endif
             this.width = width;
             this.height = height;
             this.windowForm = windowForm;
@@ -131,8 +143,12 @@ namespace SwordEngine
             keyManager.Unsubscribe();
             mouseManager.Unsubscribe();
 
-            keyManager.Subscribe(Hook.GlobalEvents());
+            keyManager.Subscribe(Hook.AppEvents());
             mouseManager.Subscribe(Hook.AppEvents());
+
+            // Subscribe to form focus events to pause input when window loses focus
+            windowForm.Deactivate += OnWindowDeactivate;
+            windowForm.Activated += OnWindowActivate;
         }
 
         /// <summary>

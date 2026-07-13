@@ -72,12 +72,18 @@ namespace SwordEngine.Input
 
         public void Update()
         {
-            up = keys[(int)Keys.W];
-            down = keys[(int)Keys.S];
-            left = keys[(int)Keys.A];
-            right = keys[(int)Keys.D];
+            up = keys[(int)Keys.W] || keys[(int)Keys.Up];
+            down = keys[(int)Keys.S] || keys[(int)Keys.Down];
+            left = keys[(int)Keys.A] || keys[(int)Keys.Left];
+            right = keys[(int)Keys.D] || keys[(int)Keys.Right];
             space = keys[(int)Keys.Space];
             pause = keys[(int)Keys.P];
+        }
+
+        public void ClearAllKeys()
+        {
+            Array.Clear(keys, 0, keys.Length);
+            up = down = left = right = space = pause = false;
         }
     }
 }

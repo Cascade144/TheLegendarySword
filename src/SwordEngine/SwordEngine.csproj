@@ -8,6 +8,7 @@
     <UseWPF>False</UseWPF>
     <UseWindowsForms>True</UseWindowsForms>
     <StartupObject>Program</StartupObject>
+    <ApplicationIcon>..\..\res\textures\legendarySword.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>

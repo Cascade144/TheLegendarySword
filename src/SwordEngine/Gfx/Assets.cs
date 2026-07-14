@@ -71,7 +71,7 @@ namespace SwordEngine.Gfx
 
             // Sprites for world2 tilesheet.
             SKImage spriteSheetWorld2 = SKImage.FromEncodedData(Path.Combine(texturesPath, "world2tileSheet.png"));
-            SKBitmap bitmapWorld2 = SKBitmap.FromImage(spriteSheetWorld1);
+            SKBitmap bitmapWorld2 = SKBitmap.FromImage(spriteSheetWorld2);
             SpriteSheet world2 = new SpriteSheet(bitmapWorld2);
             cFloor = world2.Crop(0, 0, width, height);
             cRock = world2.Crop(width, 0, width, height);

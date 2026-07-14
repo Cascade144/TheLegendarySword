@@ -46,6 +46,14 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(600, 601);
             Controls.Add(pictureBox1);
+
+            // Load icon
+            string iconPath = SwordEngine.Utilities.ResourcePaths.ResolveResourcePath("res", "textures", "legendarySword.ico");
+            if (System.IO.File.Exists(iconPath))
+            {
+                Icon = new System.Drawing.Icon(iconPath);
+            }
+
             MaximumSize = new Size(616, 640);
             MinimumSize = new Size(616, 640);
             Name = "DisplayForm";

@@ -8,13 +8,13 @@ OutputDir=.
 Compression=lzma
 SolidCompression=yes
 AppPublisher=The Legendary Sword
-AppPublisherURL=https://example.com/
-AppSupportURL=https://example.com/
-AppUpdatesURL=https://example.com/
+AppPublisherURL=https://gustavochavez.dev/
+AppSupportURL=https://gustavochavez.dev/legendary-sword
+AppUpdatesURL=https://gustavochavez.dev/legendary-sword
 PrivilegesRequired=lowest
 
 [Files]
-Source: "..\artifacts\publish\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "artifacts\publish\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "..\res\*"; DestDir: "{app}\res"; Flags: ignoreversion recursesubdirs createallsubdirs
 
 [Icons]

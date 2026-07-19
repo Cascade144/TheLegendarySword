@@ -2,19 +2,33 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net7.0-windows7.0</TargetFramework>
+    <TargetFramework>net8.0-windows</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <UseWPF>False</UseWPF>
     <UseWindowsForms>True</UseWindowsForms>
     <StartupObject>Program</StartupObject>
     <ApplicationIcon>..\..\res\textures\legendarySword.ico</ApplicationIcon>
+
+    <!-- Git-based Versioning -->
+    <MinVerTagPrefix>v</MinVerTagPrefix>
+    <MinVerDefaultPreReleaseIdentifiers>preview</MinVerDefaultPreReleaseIdentifiers>
+
+    <!-- Assembly metadata -->
+    <Company>TheLegendarySword</Company>
+    <Product>SwordEngine</Product>
+    <Copyright>Copyright © $([System.DateTime]::UtcNow.Year)</Copyright>
+    <Description>The Legendary Sword WinForms Game</Description>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MinVer" Version="6.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="MouseKeyHook" Version="5.7.1" />
     <PackageReference Include="SkiaSharp" Version="3.119.0" />
-    <PackageReference Include="System.Drawing.Common" Version="7.0.0" />
+    <PackageReference Include="System.Drawing.Common" Version="8.0.0" />
   </ItemGroup>
 
 </Project>

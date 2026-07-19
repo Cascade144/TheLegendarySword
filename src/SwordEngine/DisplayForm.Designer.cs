@@ -54,6 +54,7 @@
                 Icon = new System.Drawing.Icon(iconPath);
             }
 
+            MaximizeBox = false;
             MaximumSize = new Size(616, 640);
             MinimumSize = new Size(616, 640);
             Name = "DisplayForm";

@@ -1,0 +1,71 @@
+﻿namespace SwordEngine
+{
+    partial class DisplayForm
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            pictureBox1 = new PictureBox();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            SuspendLayout();
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Location = new Point(0, 1);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(600, 600);
+            pictureBox1.TabIndex = 0;
+            pictureBox1.TabStop = false;
+            // 
+            // DisplayForm
+            // 
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(600, 601);
+            Controls.Add(pictureBox1);
+
+            // Load icon
+            string iconPath = SwordEngine.Utilities.ResourcePaths.ResolveResourcePath("res", "textures", "legendarySword.ico");
+            if (System.IO.File.Exists(iconPath))
+            {
+                Icon = new System.Drawing.Icon(iconPath);
+            }
+
+            MaximizeBox = false;
+            MaximumSize = new Size(616, 640);
+            MinimumSize = new Size(616, 640);
+            Name = "DisplayForm";
+            SizeGripStyle = SizeGripStyle.Hide;
+            Text = "SwordEngine";
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ResumeLayout(false);
+        }
+
+        #endregion
+
+        private PictureBox pictureBox1;
+    }
+}

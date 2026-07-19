@@ -1,0 +1,16 @@
+World Creating:
+Uses .txt files
+first line contains the width and height of the world in tiles both numbers are separated by a space
+second line contains the x and y position of the initial player spawn point (in tiles)
+third line starts the actual world building
+use the ids of the specific tiles you want 
+
+example of creating a 5x5 world that spawns the player at tile 0,0 and the world is just using tile id 0
+
+5 5
+0 0
+0 0 0 0 0
+0 0 0 0 0
+0 0 0 0 0
+0 0 0 0 0
+0 0 0 0 0

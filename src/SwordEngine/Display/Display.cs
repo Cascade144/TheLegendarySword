@@ -2,6 +2,10 @@
 
 namespace SwordEngine.Display
 {
+    /// <summary>
+    /// The display class is responsible for creating and managing the window display for the game engine.
+    /// It utilizes SkiaSharp to render graphics onto a surface that can be displayed in the operating system's window.
+    /// </summary>
     public class Display
     {
         /// <summary>
@@ -30,7 +34,7 @@ namespace SwordEngine.Display
         private String title;
 
         /// <summary>
-        /// The generic Display instantiation method.
+        /// The generic <see cref="Display"/> instantiation method.
         /// </summary>
         /// <param name="width">The desired game width.</param>
         /// <param name="height">The desired game height.</param>
@@ -39,13 +43,13 @@ namespace SwordEngine.Display
             this.width = width;
             this.height = height;
 
-            createDisplay();
+            CreateDisplay();
         }
 
         /// <summary>
         /// Creates a Window Display in the Operating System utilizing SkiaSharp.
         /// </summary>
-        private void createDisplay()
+        private void CreateDisplay()
         {
             // First determine Frame size.
             SKImageInfo imageInfo = new SKImageInfo();

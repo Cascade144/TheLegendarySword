@@ -1,6 +1,6 @@
 [Setup]
 AppName=The Legendary Sword
-AppVersion=1.0.0
+AppVersion=1.0.1
 DefaultDirName={autopf}\The Legendary Sword
 DefaultGroupName=The Legendary Sword
 OutputBaseFilename=TheLegendarySwordSetup

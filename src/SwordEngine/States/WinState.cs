@@ -1,4 +1,5 @@
 ﻿using SkiaSharp;
+using SwordEngine.Utilities;
 
 namespace SwordEngine.States
 {
@@ -18,7 +19,14 @@ namespace SwordEngine.States
         /// <param name="handler"></param>
         public WinState(Handler handler) : base(handler)
         {
-            SKImage img = SKImage.FromEncodedData("F:/source/TheLegendarySword/res/textures/winScreen.png");
+            var winPath = ResourcePaths.ResolveResourcePath("res", "textures", "winScreen.png");
+            SKImage? img = SKImage.FromEncodedData(winPath);
+
+            if (img == null)
+            {
+                throw new FileNotFoundException($"Could not load win screen image from: {winPath}");
+            }
+
             bitmap = SKBitmap.FromImage(img);
         }
 

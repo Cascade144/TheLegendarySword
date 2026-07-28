@@ -2,6 +2,9 @@
 
 namespace SwordEngine.Gfx
 {
+    /// <summary>
+    /// The SpriteSheet class is responsible for cropping out individual sprites from a larger sprite sheet image.
+    /// </summary>
     public class SpriteSheet
     {
         /// <summary>
@@ -10,7 +13,8 @@ namespace SwordEngine.Gfx
         private SKBitmap sheet;
 
         /// <summary>
-        /// Takes in a BufferedImage and sets this class's sheet variable to it.
+        /// Initializes a new instance of the <see cref="SpriteSheet"/> class.
+        /// Takes in a SKBitmap and sets this class's sheet variable to it.
         /// </summary>
         /// <param name="sheet">Image being cropped.</param>
         public SpriteSheet(SKBitmap sheet)

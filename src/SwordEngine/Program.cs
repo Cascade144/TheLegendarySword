@@ -8,7 +8,7 @@ public class Program
     /// <summary>
     /// The main entry point of the game.
     /// </summary>
-    /// <param name="args"></param>
+    /// <param name="args">The args for the game.</param>
     public static void Main(string[] args)
     {
         Application.EnableVisualStyles();

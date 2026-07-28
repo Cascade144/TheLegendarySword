@@ -1,6 +1,4 @@
-﻿
-
-using SkiaSharp;
+﻿using SkiaSharp;
 using SwordEngine.Weapons;
 
 namespace SwordEngine.Entities.Statics

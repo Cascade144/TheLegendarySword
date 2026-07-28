@@ -111,7 +111,10 @@ namespace SwordEngine.Entities.Creatures
             }
         }
 
-
+        /// <summary>
+        /// Method to render the spooky skeleton on the canvas.
+        /// </summary>
+        /// <param name="canvas"></param>
         public override void Render(SKCanvas canvas)
         {
             SKPoint sKPoint = new SKPoint((int)(x - handler.GetGameCamera().GetXOffset())
@@ -120,11 +123,20 @@ namespace SwordEngine.Entities.Creatures
 
         }
 
+        /// <summary>
+        /// Method to handle the death of the spooky skeleton.
+        /// </summary>
         public override void Die()
         {
             Console.WriteLine("Skeleton Slain");
         }
 
+        /// <summary>
+        /// Method to give the spooky skeleton a new weapon.
+        /// Probably should not do that.
+        /// </summary>
+        /// <param name="w">The weapon to give to the creature.</param>
+        /// <exception cref="NotImplementedException"></exception>
         public override void SetNewWeapon(Weapon w)
         {
             throw new NotImplementedException();

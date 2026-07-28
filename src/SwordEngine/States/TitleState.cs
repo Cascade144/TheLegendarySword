@@ -25,9 +25,10 @@ namespace SwordEngine.States
         Rectangle cursor = new Rectangle();
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="TitleState"/> class.
         /// Constructs a title state object and passes the handler to the main state object.
         /// </summary>
-        /// <param name="handler"></param>
+        /// <param name="handler">The game handler.</param>
         public TitleState(Handler handler) : base(handler)
         {
             var titlePath = ResourcePaths.ResolveResourcePath("res", "textures", "titleScreen.png");
@@ -40,9 +41,9 @@ namespace SwordEngine.States
             start.Y = 420;
         }
 
-        /**
-         * The update method, currently does nothing
-         */
+        /// <summary>
+        /// The update method for the title state.
+        /// </summary>
         public override void Update()
         {
             if (CheckClick(start))
@@ -73,9 +74,10 @@ namespace SwordEngine.States
             }
         }
 
-        /**
-         * The render method, currently does nothing
-         */
+        /// <summary>
+        /// The render method for the title state.
+        /// </summary>
+        /// <param name="canvas">The current game canvas.</param>
         public override void Render(SKCanvas canvas)
         {
             //Draw title screen background WOW

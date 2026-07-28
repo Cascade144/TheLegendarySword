@@ -63,7 +63,7 @@ namespace SwordEngine.Entities
         /// <param name="y">The entity's y position in tixels (tile pixels).</param>
         /// <param name="width">The entity's width in pixels.</param>
         /// <param name="height">The entity's height in pixels.</param>
-        public Entity(Handler handler, float x, float y, int width, int height) 
+        public Entity(Handler handler, float x, float y, int width, int height)
         {
             this.handler = handler;
             this.x = x;
@@ -121,11 +121,11 @@ namespace SwordEngine.Entities
 
         /// <summary>
         /// Takes the entity that called it, and returns a 
-        /// rectangle object that represents its hitbox
+        /// rectangle object that represents its hitbox.
         /// </summary>
-        /// <param name="xOffset"></param>
-        /// <param name="yOffset"></param>
-        /// <returns></returns>
+        /// <param name="xOffset">The x offset.</param>
+        /// <param name="yOffset">The y offset.</param>
+        /// <returns>A rectangle representing the collision bounds.</returns>
         public Rectangle GetCollisionBounds(float xOffset, float yOffset)
         {
             return new Rectangle((int)(x + bounds.X + xOffset), (int)(y + bounds.Y + yOffset), bounds.Width, bounds.Height);
@@ -247,7 +247,7 @@ namespace SwordEngine.Entities
         /// <summary>
         /// Brings the entity to life.
         /// </summary>
-        /// <param name="alive"></param>
+        /// <param name="alive">Whether the entity should be alive or not.</param>
         public void SetAlive(bool alive)
         {
             this.alive = alive;
@@ -256,7 +256,7 @@ namespace SwordEngine.Entities
         /// <summary>
         /// Gets the entities last facing direction.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The last direction the entity was facing.</returns>
         public char GetLastDirection()
         {
             return lastDirection;

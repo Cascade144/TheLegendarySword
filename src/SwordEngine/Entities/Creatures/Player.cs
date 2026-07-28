@@ -6,6 +6,9 @@ using System.Drawing;
 
 namespace SwordEngine.Entities.Creatures
 {
+    /// <summary>
+    /// Class for the main player character. Inherits from Creature class.
+    /// </summary>
     public class Player : Creature
     {
         private int iFrames = 0;
@@ -33,10 +36,10 @@ namespace SwordEngine.Entities.Creatures
             defaultDagger = currWeap;
         }
 
-        /**
-         * Updates this entity by calling the getInput and move functions
-         * Also tells the camera object to center itself on this entity
-         */
+        /// <summary>
+        /// Updates this entity by calling the getInput and move functions.
+        /// Also tells the camera object to center itself on this entity.
+        /// </summary>
         public override void Update()
         {
             GetInput();

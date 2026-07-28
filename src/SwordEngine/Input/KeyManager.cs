@@ -3,6 +3,9 @@ using System.Windows.Forms;
 
 namespace SwordEngine.Input
 {
+    /// <summary>
+    /// Class that manages the keyboard input for the game. It subscribes to keyboard events and updates the state of control keys accordingly.
+    /// </summary>
     public class KeyManager
     {
         private IKeyboardMouseEvents? mouseKeyHook;
@@ -17,11 +20,19 @@ namespace SwordEngine.Input
         /// </summary>
         public bool up, down, left, right, space, pause;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="KeyManager"/> class.
+        /// Constructs the KeyManager and initializes the keys array to track the state of each key.
+        /// </summary>
         public KeyManager()
         {
             keys = new bool[256];
         }
 
+        /// <summary>
+        /// Method to subscribe to keyboard events. It sets up event handlers for key down and key up events, allowing the KeyManager to track the state of keys.
+        /// </summary>
+        /// <param name="events">The keyboard and mouse events to subscribe to.</param>
         public void Subscribe(IKeyboardMouseEvents events)
         {
             mouseKeyHook = events;
@@ -30,6 +41,9 @@ namespace SwordEngine.Input
             mouseKeyHook.KeyDown += AppHookKeyDown;
         }
 
+        /// <summary>
+        /// The method to unsubscribe from keyboard events.
+        /// </summary>
         public void Unsubscribe()
         {
             if (mouseKeyHook == null) return;
@@ -39,6 +53,11 @@ namespace SwordEngine.Input
             mouseKeyHook.Dispose();
         }
 
+        /// <summary>
+        /// Method to handle the KeyUp event.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="KeyEventArgs"/> instance containing the event data.</param>
         private void AppHookKeyup(object? sender, KeyEventArgs e)
         {
             Console.WriteLine("KeyPress: \t {0}", e.KeyValue);
@@ -52,6 +71,11 @@ namespace SwordEngine.Input
             e.Handled = true;
         }
 
+        /// <summary>
+        /// Method to handle the KeyDown event.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="KeyEventArgs"/> instance containing the event data.</param>
         private void AppHookKeyDown(object? sender, KeyEventArgs e)
         {
             Console.WriteLine("KeyPress: \t {0}", e.KeyValue);
@@ -70,6 +94,9 @@ namespace SwordEngine.Input
             e.Handled = true;
         }
 
+        /// <summary>
+        /// Method to update the state of control keys based on the current state of the keys array.
+        /// </summary>
         public void Update()
         {
             up = keys[(int)Keys.W] || keys[(int)Keys.Up];
@@ -80,6 +107,9 @@ namespace SwordEngine.Input
             pause = keys[(int)Keys.P];
         }
 
+        /// <summary>
+        /// Method to clear the state of all keys. It resets the keys array and sets all control keys to false.
+        /// </summary>
         public void ClearAllKeys()
         {
             Array.Clear(keys, 0, keys.Length);

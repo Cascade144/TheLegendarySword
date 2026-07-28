@@ -5,6 +5,11 @@ using System.Drawing;
 
 namespace SwordEngine.Weapons
 {
+    /// <summary>
+    /// An abstract class for weapons in the game.
+    /// This class provides the basic structure and functionality for all weapon types, including durability, cooldown, attack mechanics, and rendering.
+    /// Specific weapon types should inherit from this class and implement their unique behaviors.
+    /// </summary>
     public abstract class Weapon
     {
         /// <summary>
@@ -143,9 +148,9 @@ namespace SwordEngine.Weapons
         }
 
         /// <summary>
-        /// 
+        /// Method to render the weapon.
         /// </summary>
-        /// <param name="canvas"></param>
+        /// <param name="canvas">The canvas the game is currently using.</param>
         public virtual void Render(SKCanvas canvas)
         {
 
@@ -203,6 +208,13 @@ namespace SwordEngine.Weapons
             }
         }
 
+        /// <summary>
+        /// Method to render the weapon when it is picked up, equipped, and attacking.
+        /// This method is called in the Render method above.
+        /// </summary>
+        /// <param name="canvas">The canvas the game is currently using.</param>
+        /// <param name="x">Where in the x axis of the canvas to place the weapon.</param>
+        /// <param name="y">Where in the y axis of the canvas to place the weapon.</param>
         public virtual void Render(SKCanvas canvas, float x, float y)
         {
             if (!attacking)

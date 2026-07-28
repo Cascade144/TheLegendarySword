@@ -28,9 +28,13 @@ namespace SwordEngine.Entities
         /// <summary>
         /// List of all the weapons in the game.
         /// </summary>
-        
         private List<Weapon> weapons;
 
+        /// <summary>
+        /// Constructs the entity manager.
+        /// </summary>
+        /// <param name="handler">The main game handler.</param>
+        /// <param name="player">The main player.</param>
         public EntityManager(Handler handler, Player player)
         {
             this.handler = handler;
@@ -70,7 +74,7 @@ namespace SwordEngine.Entities
         /// Since the update method is always called before the render method is, the ArrayList is 
         /// already sorted and will correctly render all entities to the screen.
         /// </summary>
-        /// <param name="canvas"></param>
+        /// <param name="canvas">The current game canvas.</param>
         public void render(SKCanvas canvas)
         {
             foreach(Entity e in entities)
@@ -85,7 +89,6 @@ namespace SwordEngine.Entities
 
             player.Render(canvas);
         }
-
 
         /// <summary>
         ///  Adds an entity to the List of entities.
@@ -110,7 +113,7 @@ namespace SwordEngine.Entities
         /// <summary>
         /// Returns the main handler for the game.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The main handler.</returns>
         public Handler getHandler()
         {
             return handler;
@@ -124,7 +127,6 @@ namespace SwordEngine.Entities
         {
             this.handler = handler;
         }
-        
 
         /// <summary>
         /// Returns the player entity.
@@ -134,7 +136,6 @@ namespace SwordEngine.Entities
         {
             return player;
         }
-        
 
         /// <summary>
         /// Sets the player.
@@ -144,10 +145,9 @@ namespace SwordEngine.Entities
         {
             this.player = player;
         }
-        
 
         /// <summary>
-        /// Gets the entities
+        /// Gets the entities.
         /// </summary>
         public List<Entity> GetEntities()
         {
@@ -155,7 +155,7 @@ namespace SwordEngine.Entities
         }
 
         /// <summary>
-        /// 
+        /// Gets the list of weapons.
         /// </summary>
         public List<Weapon> GetWeapons()
         {

@@ -60,8 +60,6 @@ namespace SwordEngine.States
             canvas.DrawRect(0, 0, handler.GetWidth(), handler.GetHeight(), RectPaint);
             SKPoint sKPoint = new SKPoint();
             canvas.DrawBitmap(bitmap, sKPoint);
-
-
         }
     }
 }

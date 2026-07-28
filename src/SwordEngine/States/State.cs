@@ -18,6 +18,7 @@ namespace SwordEngine.States
         protected Handler handler;
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="State"/> class.
         /// Constructs the main state object, setting its handler variable.
         /// </summary>
         public State(Handler handler)

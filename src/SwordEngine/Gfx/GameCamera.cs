@@ -19,7 +19,8 @@ namespace SwordEngine.Gfx
         private Handler handler;
 
         /// <summary>
-        /// Constructs a GameCamera object initializing its offsets (initial position) 
+        /// Initializes a new instance of the <see cref="GameCamera"/> class.
+        /// Constructs a GameCamera object initializing its offsets (initial position)
         /// to the given variables.
         /// </summary>
         /// <param name="handler">The main handler object.</param>
@@ -84,13 +85,12 @@ namespace SwordEngine.Gfx
         #region Getters and Setters
 
         /// <summary>
-        /// Returns the xOffset in tixels
+        /// Returns the xOffset in tixels.
         /// </summary>
         public float GetXOffset()
         {
             return xOffset;
         }
-        
 
         /// <summary>
         /// Sets the xOffset value to the given tixel amount
@@ -113,7 +113,7 @@ namespace SwordEngine.Gfx
         }
 
         /// <summary>
-        /// Sets the yOffset value to the given tixel amount
+        /// Sets the yOffset value to the given tixel amount.
         /// </summary>
         /// <param name="yOffset">The offset in tixels to set.</param>
         public void SetYOffset(float yOffset)

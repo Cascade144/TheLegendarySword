@@ -54,7 +54,7 @@ namespace SwordEngine
         }
 
         /// <summary>
-        /// Returns the mainGame mouseManager
+        /// Returns the mainGame mouseManager.
         /// </summary>
         public MouseManager GetMouseManager()
         {
@@ -78,7 +78,7 @@ namespace SwordEngine
         }
 
         /// <summary>
-        /// Sets the MainGame object to whatever is passed in
+        /// Sets the MainGame object to whatever is passed in.
         /// </summary>
         /// <param name="game">The main game object.</param>
         public void SetGame(MainGame game)
@@ -87,7 +87,7 @@ namespace SwordEngine
         }
 
         /// <summary>
-        /// Returns the main world object
+        /// Returns the main world object.
         /// </summary>
         public World.World GetWorld()
         {
@@ -95,7 +95,7 @@ namespace SwordEngine
         }
 
         /// <summary>
-        /// Sets the main world object
+        /// Sets the main world object.
         /// </summary>
         public void SetWorld(World.World world)
         {

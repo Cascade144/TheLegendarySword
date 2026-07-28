@@ -24,12 +24,19 @@ namespace SwordEngine.States
             bitmap = SKBitmap.FromImage(img);
         }
 
-        
+        /// <summary>
+        /// Method to update the game over state.
+        /// Currently, it does not perform any actions.
+        /// </summary>
         public override void Update()
         {
             // TODO Auto-generated method stub
         }
 
+        /// <summary>
+        /// Render the game over state on the provided canvas.
+        /// </summary>
+        /// <param name="canvas">The canvas the game is currently using.</param>
         public override void Render(SKCanvas canvas)
         {
             canvas.Clear(SKColors.Red);

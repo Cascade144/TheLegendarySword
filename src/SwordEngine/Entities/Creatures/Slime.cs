@@ -7,6 +7,9 @@ using System.Drawing;
 
 namespace SwordEngine.Entities.Creatures
 {
+    /// <summary>
+    /// Method to create a slime creature that moves around the map and attacks the player when in range.
+    /// </summary>
     public class Slime : Creature
     {
         /// <summary>
@@ -34,10 +37,10 @@ namespace SwordEngine.Entities.Creatures
             this.speed = 2.0f; //20.0f;
         }
 
-        /**
-         * Updates the slime by calling the getInput() function
-         * and moves it around the map accordingly.
-         */
+        /// <summary>
+        /// Updates the slime by calling the getInput() function
+        /// and moves it around the map accordingly.
+        /// </summary>
         public override void Update()
         {
             GetInput();
@@ -46,10 +49,9 @@ namespace SwordEngine.Entities.Creatures
             handler.GetGameCamera();
         }
 
-        /**
-         * Sets the random variable and determines what direction the 
-         * slime will move
-         */
+        /// <summary>
+        /// Sets the random variable and determines what direction the slime will move.
+        /// </summary>
         public void GetInput()
         {
 
@@ -63,7 +65,6 @@ namespace SwordEngine.Entities.Creatures
 
             if (distance <= 4 * Tile.TILEWIDTH)
             {
-                //System.out.println("noticed");
                 if (sleep < 15)
                 {
                     sleep++;
@@ -148,11 +149,19 @@ namespace SwordEngine.Entities.Creatures
             //		, (int) (y + bounds.y - handler.getGameCamera().getyOffset()), bounds.width, bounds.height);
         }
 
+        /// <summary>
+        /// Method to handle the death of the slime creature.
+        /// </summary>
         public override void Die()
         {
             Console.WriteLine("Slime Slain");
         }
 
+        /// <summary>
+        /// Method to give the slime a new weapon. Not implemented yet.
+        /// </summary>
+        /// <param name="w">The weapon to give.</param>
+        /// <exception cref="NotImplementedException"></exception>
         public override void SetNewWeapon(Weapon w)
         {
             throw new NotImplementedException();

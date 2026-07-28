@@ -3,6 +3,10 @@ using SwordEngine.Utilities;
 
 namespace SwordEngine.Gfx
 {
+    /// <summary>
+    /// The Assets class is responsible for loading and managing the game's graphical assets, including textures, sprites, and images used in the game.
+    /// It provides static variables to hold references to various images and methods to initialize and load these assets from the specified resource paths.
+    /// </summary>
     public class Assets
     {
         /// <summary>
@@ -21,12 +25,12 @@ namespace SwordEngine.Gfx
         public static SKBitmap cFloor, cRock, cMushroom, cSlime, cExit, cWall;
 
         /// <summary>
-        /// Player images
+        /// Player images.
         /// </summary>
         public static SKBitmap player;
 
         /// <summary>
-        /// Enemy Images
+        /// Enemy Images.
         /// </summary>
         public static SKBitmap slime, mouse, skeleton, snake;
 
@@ -36,18 +40,39 @@ namespace SwordEngine.Gfx
         public static SKBitmap chest;
 
         /// <summary>
-        /// Static Images.
+        /// Static image for dagger weapon.
         /// </summary>
         public static SKBitmap[] dagger = new SKBitmap[5];
+
+        /// <summary>
+        /// Static image for long sword weapon.
+        /// </summary>
         public static SKBitmap[] longSword = new SKBitmap[5];
+
+        /// <summary>
+        /// Static image for axe weapon.
+        /// </summary>
         public static SKBitmap[] axe = new SKBitmap[5];
+
+        /// <summary>
+        /// Static image for ball and chain weapon.
+        /// </summary>
         public static SKBitmap[] ballNChain = new SKBitmap[2];
+
+        /// <summary>
+        /// Static image for spear weapon.
+        /// </summary>
         public static SKBitmap[] spear = new SKBitmap[5];
+
+        /// <summary>
+        /// Static image for katana weapon (Not assigned as it is not used).
+        /// </summary>
         public static SKBitmap katana;
-        
+
         /// <summary>
         /// This function loads and crops out sprites from the /res/textures folder 
-        /// and places the images in their respective bufferedImage variable
+        /// and places the images in their respective bufferedImage variable.
+        /// This is all done manually, with basic matrices math.
         /// </summary>
         public static void init()
         {
@@ -81,12 +106,12 @@ namespace SwordEngine.Gfx
             cExit = world2.Crop(width * 4, 0, width, height);
             cWall = world2.Crop(0, height, width, height);
 
-            //Finds a creature sheet from resources folder
+            // Finds a creature sheet from resources folder
             SKImage spriteSheetCreature = SKImage.FromEncodedData(Path.Combine(texturesPath, "creatureSheet.png"));
             SKBitmap bitmapCreature = SKBitmap.FromImage(spriteSheetCreature);
             SpriteSheet creatureSheet = new SpriteSheet(bitmapCreature);
 
-            //Grab each sprite from the sheet and apply to each creature variable
+            // Grab each sprite from the sheet and apply to each creature variable
             slime = creatureSheet.Crop(0, 0, width, height);
             mouse = creatureSheet.Crop(width, 0, width, height);
             skeleton = creatureSheet.Crop(width * 2, 0, width, height);
@@ -106,7 +131,7 @@ namespace SwordEngine.Gfx
 
             // Load Weap sheet
             SKImage spriteSheetWeap = SKImage.FromEncodedData(Path.Combine(texturesPath, "weaponTiles.png"));
-            SKBitmap bitmapWeap= SKBitmap.FromImage(spriteSheetWeap);
+            SKBitmap bitmapWeap = SKBitmap.FromImage(spriteSheetWeap);
             SpriteSheet weapon = new SpriteSheet(bitmapWeap);
 
             // Grab each sprite from the sheet and apply to each creature variable
@@ -117,6 +142,7 @@ namespace SwordEngine.Gfx
                 axe[i] = weapon.Crop((width * 4), (height * 2) * i, (width * 2), (height * 2));
                 spear[i] = weapon.Crop((width * 6), (height * 2) * i, (width * 2), (height * 2));
             }
+
             ballNChain[0] = weapon.Crop((width * 8), 0, (width * 2), (height * 2));
             ballNChain[1] = weapon.Crop((width * 8), (height * 2), (width * 2), (height * 2));
             katana = weapon.Crop(0, (height * 10), (width * 2), (height * 2));

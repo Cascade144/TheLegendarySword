@@ -4,6 +4,9 @@ using SwordEngine.World;
 
 namespace SwordEngine.States
 {
+    /// <summary>
+    /// The game state class, which is responsible for managing the game world and its updates and rendering.
+    /// </summary>
     public class GameState : State
     {
         /// <summary>

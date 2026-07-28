@@ -27,12 +27,11 @@ namespace SwordEngine.World
         /// The width/height of the world in Tiles.
         /// </summary>
         private int width, height;
-        
+
         /// <summary>
         /// The spawn location of the player entity in Tixels determined by the world file.
         /// </summary>
         private int spawnX, spawnY;
-        
 
         /// <summary>
         /// A multidimensional array containing the layout of the entire world, 
@@ -101,7 +100,7 @@ namespace SwordEngine.World
         /// the gameCamera object, then calls the entityManager's render method 
         /// which renders all entities.
         /// </summary>
-        /// <param name="canvas"></param>
+        /// <param name="canvas">The main game canvas.</param>
         public void Render(SKCanvas canvas)
         {
             // Render Tiles first.
@@ -127,10 +126,10 @@ namespace SwordEngine.World
         }
 
         /// <summary>
-        /// Returns the Tile object at the given TILE location
+        /// Returns the Tile object at the given TILE location.
         /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
+        /// <param name="x">The x location.</param>
+        /// <param name="y">The y location.</param>
         public Tile GetTile(int x, int y)
         {
 
@@ -150,11 +149,11 @@ namespace SwordEngine.World
 
         /// <summary>
         /// Loads the world from the given world file path (parses through the file)
-        /// Determines the width/height of the world in TILES 
+        /// Determines the width/height of the world in TILES.
         /// Determines the spawn location of the player in TIXELS
-        /// Saves the tile information into the wTiles array
+        /// Saves the tile information into the wTiles array.
         /// </summary>
-        /// <param name="path"></param>
+        /// <param name="path">The path for the world.</param>
         private void loadWorld(string path)
         {
             string file = File.ReadAllText(path);
@@ -176,7 +175,10 @@ namespace SwordEngine.World
 
         }
 
-        public void teleport()
+        /// <summary>
+        /// Method to teleport the player to a new location in the world.
+        /// </summary>
+        public void Teleport()
         {
         }
 

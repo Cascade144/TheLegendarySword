@@ -1,15 +1,18 @@
-﻿using SwordEngine.States;
-using SwordEngine.Gfx;
-using SkiaSharp;
-using SwordEngine.Input;
+﻿using System.Diagnostics;
 using System.Drawing;
-using System.Windows.Forms;
 using System.Runtime.InteropServices;
-using System.Diagnostics;
+using System.Windows.Forms;
 using Gma.System.MouseKeyHook;
+using SkiaSharp;
+using SwordEngine.Gfx;
+using SwordEngine.Input;
+using SwordEngine.States;
 
 namespace SwordEngine
 {
+    /// <summary>
+    /// The class that runs the main game loop and initializes the game.
+    /// </summary>
     public class MainGame
     {
         #region Graphics
@@ -125,8 +128,9 @@ namespace SwordEngine
         /// <summary>
         /// Constructs the MainGame object, and sets the default values of the window
         /// </summary>
-        /// <param name="width"></param>
-        /// <param name="height"></param>
+        /// <param name="width">The width of the game window in pixels.</param>
+        /// <param name="height">The height of the game window in pixels.</param>
+        /// <param name="windowForm">The DisplayForm instance representing the game window.</param>
         public MainGame(int width, int height, DisplayForm windowForm)
         {
 #if DEBUG
@@ -147,14 +151,14 @@ namespace SwordEngine
             mouseManager.Subscribe(Hook.AppEvents());
 
             // Subscribe to form focus events to pause input when window loses focus
-            windowForm.Deactivate += OnWindowDeactivate;
-            windowForm.Activated += OnWindowActivate;
+            windowForm.Deactivate += this.OnWindowDeactivate;
+            windowForm.Activated += this.OnWindowActivate;
         }
 
         /// <summary>
         /// The Main update method.
         /// </summary>
-        private void update()
+        private void UpdateGame()
         {
             keyManager.Update();
             if (State.GetState() == titleState)
@@ -312,7 +316,7 @@ namespace SwordEngine
                 // check if you need to render something
                 if (delta >= 1)
                 {
-                    update();
+                    UpdateGame();
                     Render();
                     updates++;
                     delta--;
